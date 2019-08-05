@@ -1,4 +1,7 @@
 {
+    "name": "productsupcom/fnacapiclient",
+    "description": "PHP SDK for the fnac API",
+    "type": "project",
     "require": {
         "zendframework/zend-http" : "2.3.2",
         "zendframework/zend-uri" : "2.3.2",
