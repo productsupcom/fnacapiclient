@@ -4,6 +4,9 @@ namespace FnacApiClient\Type;
 
 /**
  * LogisticTypeId
+ *
+ * This class is technically never used but it has been created and kept for consistency purposes with the original
+ * FNAC library. It could be used for data validation purposes.
  */
 class LogisticTypeId extends AbstractType
 {
