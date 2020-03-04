@@ -51,6 +51,8 @@ class Offer extends Entity
     private $internal_comment;
     private $showcase;
     private $promotion;
+    private $time_to_ship;
+    private $logistic_type_id;
 
     const STATE_NEW             = 11;    
     const STATE_USED_AS_NEW     = 1;
@@ -122,7 +124,15 @@ class Offer extends Entity
         if (!is_null($this->promotion)) {
             $data['promotion'] = $this->promotion;
         }
-        
+
+        if (!is_null($this->time_to_ship)) {
+            $data['time_to_ship'] = $this->time_to_ship;
+        }
+
+        if (!is_null($this->logistic_type_id)) {
+            $data['logistic_type_id'] = $this->logistic_type_id;
+        }
+
         return $data;
     }
 
@@ -167,6 +177,14 @@ class Offer extends Entity
             $tmpObj = new Promotion();
             $tmpObj->denormalize($denormalizer, $data['promotion'], $format);
             $this->promotion = $tmpObj;
+        }
+
+        if (isset($data['time_to_ship'])) {
+            $this->time_to_ship = (int) $data['time_to_ship'];
+        }
+
+        if (isset($data['logistic_type_id'])) {
+            $this->logistic_type_id = $data['logistic_type_id'];
         }
     }
 
@@ -304,6 +322,28 @@ class Offer extends Entity
     public function setPromotion($promotion)
     {
         $this->promotion = $promotion;
+    }
+
+    /**
+     * Set specific time to ship to an offer
+     *
+     * @param int $time_to_ship Positive integer
+     */
+    public function setTimeToShip($time_to_ship)
+    {
+        $this->time_to_ship = $time_to_ship;
+    }
+
+    /**
+     * Set Logistic type associated to the offer
+     *
+     * @see \FnacApiClient\Type\LogisticTypeId
+     *
+     * @param string $logistic_type_id
+     */
+    public function setLogisticTypeId($logistic_type_id)
+    {
+        $this->logistic_type_id = $logistic_type_id;
     }
 
     /**
@@ -478,5 +518,27 @@ class Offer extends Entity
     public function getFeeIncludingAllTaxes()
     {
         return $this->fee_including_all_taxes;
+    }
+
+    /**
+     * Offer's specific time to ship
+     *
+     * @return int
+     */
+    public function getTimeToShip()
+    {
+        return $this->time_to_ship;
+    }
+
+    /**
+     * Offer's Logistic type
+     *
+     * @see \FnacApiClient\Type\LogisticTypeId
+     *
+     * @return string
+     */
+    public function getLogisticTypeId()
+    {
+        return $this->logistic_type_id;
     }
 }
